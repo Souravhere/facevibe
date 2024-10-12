@@ -129,7 +129,7 @@ export default function FaceDetection() {
               This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis. Try different expressions to see how accurate it is!
             </p>
             <p className="text-red-500 font-bold text-sm">
-              Note: This web app is just for fun. It doesn't store any data or contain a backend, so don't worry about privacy.
+              Note: This web app is just for fun. It does not store any data or contain a backend, so dont worry about privacy.
             </p>
           </div>
         </>
