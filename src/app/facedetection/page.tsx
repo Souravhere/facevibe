@@ -114,10 +114,18 @@ export default function FaceDetection() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
-      <h1 className="text-4xl font-bold mb-8 text-center animate-pulse text-indigo-400">
+    <div className="flex flex-col items-center min-h-screen bg-black text-white p-4">
+      <h1 className="sm:text-4xl text-2xl font-bold mb-4 text-center animate-pulse text-indigo-400">
         Interactive Face Mood Detector
       </h1>
+      <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-gray-300 bg-red-600/40 px-4 py-3 rounded-xl my-4 font-semibold text-sm"
+            >
+               <span className='font-bold text-white'>Note:</span> This web app is just for fun. It does not store any data or contain a backend, so dont worry about privacy.
+        </motion.p>
 
       {cameraError && (
         <motion.div
@@ -169,14 +177,6 @@ export default function FaceDetection() {
               className="mb-4"
             >
               This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="text-red-400 font-bold text-sm"
-            >
-              Note: This web app is just for fun. It does not store any data or contain a backend, so don't worry about privacy.
             </motion.p>
           </div>
         </>
