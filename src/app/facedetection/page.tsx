@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react'
 import * as faceapi from 'face-api.js'
+import { motion } from 'framer-motion'
 
 export default function FaceDetection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -9,6 +10,7 @@ export default function FaceDetection() {
   const [emoji, setEmoji] = useState<string>('')
   const [mood, setMood] = useState<string>('')
   const [isLoading, setIsLoading] = useState(true)
+  const [cameraError, setCameraError] = useState(false)
 
   useEffect(() => {
     const loadModels = async () => {
@@ -32,6 +34,7 @@ export default function FaceDetection() {
           videoRef.current.srcObject = stream
         } catch (error) {
           console.error('Error accessing the camera:', error)
+          setCameraError(true)
           setIsLoading(false)
         }
       }
@@ -98,21 +101,51 @@ export default function FaceDetection() {
     }
   }
 
+  const handleAllowCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+      }
+      setCameraError(false)
+    } catch (error) {
+      console.error('Error accessing the camera:', error)
+    }
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4">
-      <h1 className="text-4xl font-bold mb-8 text-center animate-pulse">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
+      <h1 className="text-4xl font-bold mb-8 text-center animate-pulse text-indigo-400">
         Interactive Face Mood Detector
       </h1>
-      {isLoading ? (
-        <div className="text-xl">Loading models...</div>
-      ) : (
+
+      {cameraError && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-500 p-6 rounded-lg shadow-lg text-center"
+        >
+          <h2 className="text-xl font-semibold mb-4">Camera Access Required</h2>
+          <p className="mb-4">
+            This web app needs access to your camera to work. Please allow camera access to detect your mood.
+          </p>
+          <button
+            onClick={handleAllowCamera}
+            className="px-4 py-2 bg-white text-black rounded-lg font-bold hover:bg-gray-200 transition duration-300"
+          >
+            Allow Camera Access
+          </button>
+        </motion.div>
+      )}
+
+      {!cameraError && !isLoading && (
         <>
           <div className="relative max-w-full">
             <video
               ref={videoRef}
               autoPlay
               muted
-              className="rounded-lg shadow-lg max-w-full h-auto"
+              className="rounded-lg shadow-lg max-w-full h-auto border-2 border-indigo-500"
             />
             <canvas
               ref={canvasRef}
@@ -120,19 +153,37 @@ export default function FaceDetection() {
               style={{ maxWidth: '100%', height: 'auto' }}
             />
           </div>
-          <div className="mt-8 text-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-8 text-center"
+          >
             <div className="text-6xl mb-2">{emoji}</div>
             <div className="text-2xl capitalize">{mood}</div>
-          </div>
+          </motion.div>
           <div className="mt-8 text-center max-w-md">
-            <p className="mb-4">
-              This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis. Try different expressions to see how accurate it is!
-            </p>
-            <p className="text-red-500 font-bold text-sm">
-              Note: This web app is just for fun. It does not store any data or contain a backend, so dont worry about privacy.
-            </p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mb-4"
+            >
+              This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-red-400 font-bold text-sm"
+            >
+              Note: This web app is just for fun. It does not store any data or contain a backend, so don't worry about privacy.
+            </motion.p>
           </div>
         </>
+      )}
+
+      {isLoading && (
+        <div className="text-xl">Loading models...</div>
       )}
     </div>
   )
