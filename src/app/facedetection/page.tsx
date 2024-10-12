@@ -38,26 +38,46 @@ export default function FaceDetection() {
   useEffect(() => {
     const detectFaces = async () => {
       if (videoRef.current && canvasRef.current) {
-        const detections = await faceapi
-          .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-          .withFaceLandmarks()
-          .withFaceExpressions()
+        const video = videoRef.current
+        
+        // Create canvas when video metadata is loaded
+        const handleLoadedMetadata = () => {
+          const canvas = faceapi.createCanvasFromMedia(video)
+          canvasRef.current?.appendChild(canvas)
 
-        if (detections.length > 0) {
-          const expression = detections[0].expressions.asSortedArray()[0].expression
-          setEmoji(getEmojiForExpression(expression))
+          faceapi.matchDimensions(canvas, { width: 640, height: 480 })
+
+          const interval = setInterval(async () => {
+            if (video.readyState === 4) { // Ensure the video is ready
+              const detections = await faceapi
+                .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+                .withFaceLandmarks()
+                .withFaceExpressions()
+
+              if (detections.length > 0) {
+                const expression = detections[0].expressions.asSortedArray()[0].expression
+                setEmoji(getEmojiForExpression(expression))
+              }
+
+              const resizedDetections = faceapi.resizeResults(detections, { width: 640, height: 480 })
+              faceapi.draw.drawDetections(canvas, resizedDetections)
+              faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+              faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+            }
+          }, 100)
+
+          // Clear the interval when the component unmounts
+          return () => clearInterval(interval)
         }
 
-        canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(videoRef.current)
-        faceapi.matchDimensions(canvasRef.current, { width: 640, height: 480 })
+        // Listen for the loadedmetadata event
+        video.addEventListener('loadedmetadata', handleLoadedMetadata)
 
-        const resizedDetections = faceapi.resizeResults(detections, { width: 640, height: 480 })
-        faceapi.draw.drawDetections(canvasRef.current, resizedDetections)
-        faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections)
-        faceapi.draw.drawFaceExpressions(canvasRef.current, resizedDetections)
+        // Cleanup event listener on unmount
+        return () => {
+          video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+        }
       }
-
-      requestAnimationFrame(detectFaces)
     }
 
     if (!isLoading) {
@@ -102,12 +122,7 @@ export default function FaceDetection() {
               height="480"
               className="rounded-lg shadow-lg"
             />
-            <canvas
-              ref={canvasRef}
-              width="640"
-              height="480"
-              className="absolute top-0 left-0"
-            />
+            <div ref={canvasRef} className="absolute top-0 left-0" />
           </div>
           <div className="mt-8 text-6xl">{emoji}</div>
         </>
