@@ -169,16 +169,95 @@ export default function FaceDetection() {
             <div className="text-6xl mb-2">{emoji}</div>
             <div className="text-2xl capitalize">{mood}</div>
           </motion.div>
-          <div className="mt-8 text-center max-w-md">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mb-4"
-            >
-              This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis.
-            </motion.p>
-          </div>
+          <div className="mt-8 text-center">
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+    className="mb-4"
+  >
+    This interactive face detection app uses AI to recognize your facial expressions and display corresponding emojis in real time.
+  </motion.p>
+
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay: 1, duration: 0.8 }}
+    className="bg-gray-800 p-6 rounded-lg shadow-lg mt-4"
+  >
+    <h2 className="text-xl font-semibold mb-4 text-indigo-500">Project Overview</h2>
+    <p className="text-gray-300 mb-4">
+      This app is built using modern technologies and AI-powered facial detection. The goal is to create a real-time face expression detector that captures emotions and represents them through emojis, offering a fun and interactive user experience.
+    </p>
+
+    <p className="text-gray-300 mb-4">
+      The app utilizes <span className="text-indigo-400">face-api.js</span> for facial detection and expression recognition. It works in real-time within the browser, requiring only the user's camera permission, and does not use any server-side communication. The design is modern and responsive, enhanced by smooth animations and minimalistic UI components.
+    </p>
+  </motion.div>
+
+  <motion.div
+    initial={{ opacity: 0, x: -100 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 1.5, duration: 0.8 }}
+    className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6"
+  >
+    <h2 className="text-xl font-semibold mb-4 text-indigo-500">Technologies Used</h2>
+    <ul className="list-disc text-left ml-4 text-gray-300">
+      <li><strong>React:</strong> The main framework for building the dynamic and interactive user interface.</li>
+      <li><strong>TypeScript:</strong> Provides type safety and helps ensure clean, error-free code.</li>
+      <li><strong>Framer Motion:</strong> Handles the smooth animations, adding an extra layer of interactivity to the UI.</li>
+      <li><strong>Tailwind CSS:</strong> Offers utility-based CSS styling to create a modern, responsive layout.</li>
+      <li><strong>face-api.js:</strong> Core library used for real-time face detection and expression recognition.</li>
+      <li><strong>HTML5 Media API:</strong> For accessing the user's camera and processing the video stream.</li>
+    </ul>
+  </motion.div>
+
+  <motion.div
+    initial={{ opacity: 0, x: 100 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 2, duration: 0.8 }}
+    className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6"
+  >
+    <h2 className="text-xl font-semibold mb-4 text-indigo-500">Dependencies Installed</h2>
+    <ul className="list-disc text-left ml-4 text-gray-300">
+      <li><code className="bg-gray-700 px-2 py-1 rounded">face-api.js</code> – For face detection, landmarks, and expression recognition.</li>
+      <li><code className="bg-gray-700 px-2 py-1 rounded">framer-motion</code> – For adding interactive and smooth animations.</li>
+      <li><code className="bg-gray-700 px-2 py-1 rounded">tailwindcss</code> – For rapid, utility-first styling and responsive design.</li>
+      <li><code className="bg-gray-700 px-2 py-1 rounded">typescript</code> – Ensures strong typing for better code quality.</li>
+    </ul>
+  </motion.div>
+
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay: 2.5, duration: 0.8 }}
+    className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6"
+  >
+    <h2 className="text-xl font-semibold mb-4 text-indigo-500">How It Works</h2>
+    <p className="text-gray-300 mb-4">
+      The app requests camera access from the user. Once permission is granted, it starts capturing the camera feed and analyzing video frames in real time using the <span className="text-indigo-400">face-api.js</span> library. The system detects the user's face and recognizes their expressions, such as happiness, sadness, or anger, and displays an appropriate emoji overlay.
+    </p>
+    <p className="text-gray-300">
+      All processing happens locally in the browser, with no data sent to external servers. The app ensures a high level of privacy and security. The user interface is made highly interactive with <span className="text-indigo-400">Framer Motion</span> animations and responsive design powered by <span className="text-indigo-400">Tailwind CSS</span>.
+    </p>
+  </motion.div>
+
+  <motion.div
+    initial={{ opacity: 0, y: 100 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 3, duration: 0.8 }}
+    className="bg-gray-800 p-6 rounded-lg shadow-lg mt-6"
+  >
+    <h2 className="text-xl font-semibold mb-4 text-indigo-500">Future Enhancements</h2>
+    <ul className="list-disc text-left ml-4 text-gray-300">
+      <li>Expand facial recognition to detect additional emotions, such as surprise or fear.</li>
+      <li>Integrate advanced real-time filters and augmented reality (AR) features for more immersive experiences.</li>
+      <li>Optimize performance on mobile devices for smoother interaction and lower power consumption.</li>
+      <li>Include gamification elements, allowing users to interact with the app in a fun and engaging way.</li>
+    </ul>
+  </motion.div>
+</div>
+
         </>
       )}
 
