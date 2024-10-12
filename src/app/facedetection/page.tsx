@@ -59,13 +59,16 @@ export default function FaceDetection() {
                 const bestDetection = detections[0]
                 const resizedDetections = faceapi.resizeResults([bestDetection], { width: 640, height: 480 })
                 
-                // Clear previous detections
-                canvas.clearRect(0, 0, faceapiCanvas.width, faceapiCanvas.height) 
-                
-                // Draw only the best detection
-                faceapi.draw.drawDetections(faceapiCanvas, resizedDetections)
-                faceapi.draw.drawFaceLandmarks(faceapiCanvas, resizedDetections)
-                faceapi.draw.drawFaceExpressions(faceapiCanvas, resizedDetections)
+                if (canvas && faceapiCanvas) {
+                    // Clear previous detections
+                    canvas.clearRect(0, 0, faceapiCanvas.width, faceapiCanvas.height);
+                    
+                    // Draw detections, landmarks, and expressions
+                    faceapi.draw.drawDetections(faceapiCanvas, resizedDetections);
+                    faceapi.draw.drawFaceLandmarks(faceapiCanvas, resizedDetections);
+                    faceapi.draw.drawFaceExpressions(faceapiCanvas, resizedDetections);
+                  }
+                  
 
                 // Get the expression and set the emoji
                 const expression = bestDetection.expressions.asSortedArray()[0].expression
