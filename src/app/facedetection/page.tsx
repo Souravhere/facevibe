@@ -191,7 +191,7 @@ export default function FaceDetection() {
     </p>
 
     <p className="text-gray-300 mb-4">
-      The app utilizes <span className="text-indigo-400">face-api.js</span> for facial detection and expression recognition. It works in real-time within the browser, requiring only the user's camera permission, and does not use any server-side communication. The design is modern and responsive, enhanced by smooth animations and minimalistic UI components.
+      The app utilizes <span className="text-indigo-400">face-api.js</span> for facial detection and expression recognition. It works in real-time within the browser, requiring only the user camera permission, and does not use any server-side communication. The design is modern and responsive, enhanced by smooth animations and minimalistic UI components.
     </p>
   </motion.div>
 
@@ -208,7 +208,7 @@ export default function FaceDetection() {
       <li><strong>Framer Motion:</strong> Handles the smooth animations, adding an extra layer of interactivity to the UI.</li>
       <li><strong>Tailwind CSS:</strong> Offers utility-based CSS styling to create a modern, responsive layout.</li>
       <li><strong>face-api.js:</strong> Core library used for real-time face detection and expression recognition.</li>
-      <li><strong>HTML5 Media API:</strong> For accessing the user's camera and processing the video stream.</li>
+      <li><strong>HTML5 Media API:</strong> For accessing the user camera and processing the video stream.</li>
     </ul>
   </motion.div>
 
@@ -235,7 +235,7 @@ export default function FaceDetection() {
   >
     <h2 className="text-xl font-semibold mb-4 text-indigo-500">How It Works</h2>
     <p className="text-gray-300 mb-4">
-      The app requests camera access from the user. Once permission is granted, it starts capturing the camera feed and analyzing video frames in real time using the <span className="text-indigo-400">face-api.js</span> library. The system detects the user's face and recognizes their expressions, such as happiness, sadness, or anger, and displays an appropriate emoji overlay.
+      The app requests camera access from the user. Once permission is granted, it starts capturing the camera feed and analyzing video frames in real time using the <span className="text-indigo-400">face-api.js</span> library. The system detects the user face and recognizes their expressions, such as happiness, sadness, or anger, and displays an appropriate emoji overlay.
     </p>
     <p className="text-gray-300">
       All processing happens locally in the browser, with no data sent to external servers. The app ensures a high level of privacy and security. The user interface is made highly interactive with <span className="text-indigo-400">Framer Motion</span> animations and responsive design powered by <span className="text-indigo-400">Tailwind CSS</span>.
