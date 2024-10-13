@@ -33,7 +33,11 @@ const upcomingProjects = [
   { title: "Fitness Coach", description: "A virtual fitness coach that analyzes users' facial expressions during workouts." },
 ]
 
-const TypewriterEffect = ({ text }) => {
+interface TypewriterEffectProps {
+  text: string;
+}
+
+const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ text }) => {
   return (
     <motion.span
       initial={{ opacity: 0 }}
@@ -46,7 +50,7 @@ const TypewriterEffect = ({ text }) => {
 }
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<{ title: string; description: string } | null>(null)
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine)
