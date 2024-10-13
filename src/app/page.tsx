@@ -5,10 +5,10 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import Particles from "react-tsparticles"
 import { loadSlim } from "tsparticles-slim"
-import type { Engine } from "tsparticles-engine"
+import type { Engine, ISourceOptions } from "tsparticles-engine"
 import { ArrowRight, Github, Twitter } from "lucide-react"
 
-const particlesOptions = {
+const particlesOptions: ISourceOptions = {
   background: {
     color: {
       value: "transparent",
@@ -49,7 +49,6 @@ const particlesOptions = {
       width: 1,
     },
     move: {
-      direction: "none",
       enable: true,
       outModes: {
         default: "bounce",
