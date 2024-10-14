@@ -12,7 +12,7 @@ Face Vibe is an AI-powered facial recognition project built using **Next.js** an
 
 ## Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://facevibe.vercel.app/)
 
 ## Technologies Used
 
@@ -29,7 +29,7 @@ To get started with the **Face Vibe** project locally, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/face-vibe.git
+git clone https://github.com/Souravhere/facevibe
 ```
 
 2. Navigate into the project directory:
@@ -68,21 +68,6 @@ http://localhost:3000
 - `npm run build`: Builds the project for production
 - `npm start`: Starts the production server
 - `npm run lint`: Lints the code
-
-## Folder Structure
-
-```bash
-face-vibe/
-├── components/        # Reusable React components
-├── pages/             # Next.js pages
-├── public/            # Static files
-├── styles/            # Global and component-level styles
-├── utils/             # Utility functions (e.g., for Face-API integration)
-├── .eslintrc.json     # Linting configuration
-├── .gitignore         # Files and directories to ignore in git
-├── README.md          # Project documentation
-├── package.json       # Project dependencies and scripts
-```
 
 ## License
 
