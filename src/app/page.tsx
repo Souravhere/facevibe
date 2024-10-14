@@ -210,10 +210,10 @@ export default function Home() {
 
       <footer className="mt-16 text-center text-gray-400">
         <div className="flex justify-center space-x-4 mb-4">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://github.com/souravhere/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <Github />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://x.com/SouravChhimpa1" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <Twitter />
           </a>
         </div>
