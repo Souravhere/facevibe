@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Face Vibe
 
-## Getting Started
+Face Vibe is an AI-powered facial recognition project built using **Next.js** and **Face-API.js**. This app leverages cutting-edge facial recognition technology to detect facial expressions and create dynamic, personalized interactions based on the user's vibe.
 
-First, run the development server:
+## Features
+
+- Real-time facial recognition using Face-API.js
+- Expression detection (happy, sad, angry, surprised, etc.)
+- Responsive UI built with modern front-end technologies
+- Next.js for server-side rendering and optimized performance
+- Interactive, expression-based personalized experiences
+
+## Demo
+
+[Live Demo Link]()
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) – React framework for server-side rendering and static site generation
+- [Face-API.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html) – JavaScript API for real-time face detection and recognition
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework for styling
+- [Framer Motion](https://www.framer.com/motion/) – Animation library for React
+- [React](https://reactjs.org/) – JavaScript library for building user interfaces
+
+## Installation
+
+To get started with the **Face Vibe** project locally, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/face-vibe.git
+```
+
+2. Navigate into the project directory:
+
+```bash
+cd face-vibe
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open your browser and visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+1. When you access the app, allow camera permissions.
+2. The app will start analyzing your face in real time using Face-API.js.
+3. Based on your facial expressions, the app will adjust the content or interactions displayed on the screen.
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev`: Runs the Next.js development server
+- `npm run build`: Builds the project for production
+- `npm start`: Starts the production server
+- `npm run lint`: Lints the code
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Folder Structure
 
-## Deploy on Vercel
+```bash
+face-vibe/
+├── components/        # Reusable React components
+├── pages/             # Next.js pages
+├── public/            # Static files
+├── styles/            # Global and component-level styles
+├── utils/             # Utility functions (e.g., for Face-API integration)
+├── .eslintrc.json     # Linting configuration
+├── .gitignore         # Files and directories to ignore in git
+├── README.md          # Project documentation
+├── package.json       # Project dependencies and scripts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions, feel free to create a pull request or open an issue.
+
+## Acknowledgments
+
+- [Face-API.js](https://justadudewhohacks.github.io/face-api.js/) for providing the facial recognition capabilities
+- [Next.js](https://nextjs.org/) for its powerful SSR features
+- [Framer Motion](https://www.framer.com/motion/) for the smooth animations
