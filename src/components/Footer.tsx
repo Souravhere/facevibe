@@ -11,7 +11,7 @@ function Footer() {
             <Twitter />
           </a>
         </div>
-        <p>&copy; 2023 Face Vibe. All rights reserved.</p>
+        <p>&copy; 2024 Face Vibe. All rights reserved.</p>
       </footer>
   )
 }
