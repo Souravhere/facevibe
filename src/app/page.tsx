@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Particles from "react-tsparticles"
 import { loadSlim } from "tsparticles-slim"
 import type { Engine, ISourceOptions } from "tsparticles-engine"
-import { ArrowRight, Github, Twitter } from "lucide-react"
+import { ArrowRight  } from "lucide-react"
 
 const particlesOptions: ISourceOptions = {
   background: {
@@ -207,18 +207,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <footer className="mt-16 text-center text-gray-400">
-        <div className="flex justify-center space-x-4 mb-4">
-          <a href="https://github.com/souravhere/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            <Github />
-          </a>
-          <a href="https://x.com/SouravChhimpa1" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-            <Twitter />
-          </a>
-        </div>
-        <p>&copy; 2023 Face Vibe. All rights reserved.</p>
-      </footer>
     </div>
   )
 }
