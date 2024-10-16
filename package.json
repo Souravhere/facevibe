@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@types/three": "^0.169.0",
     "face-api.js": "^0.22.2",
     "framer-motion": "^11.11.8",
     "lucide-react": "^0.452.0",
@@ -17,6 +19,7 @@
     "react-dom": "^18",
     "react-tsparticles": "^2.12.2",
     "react-typewriter-effect": "^1.1.0",
+    "three": "^0.169.0",
     "tsparticles": "^3.5.0",
     "tsparticles-slim": "^2.12.0",
     "typewriter-effect": "^2.21.0"
