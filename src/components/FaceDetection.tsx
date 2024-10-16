@@ -31,6 +31,7 @@ const FaceDetection: React.FC = () => {
           const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
           if (videoRef.current) {
             videoRef.current.srcObject = stream
+            videoRef.current.play()
           }
         }
         setIsLoading(false)
@@ -42,47 +43,64 @@ const FaceDetection: React.FC = () => {
     }
 
     loadModelsAndStartVideo()
+
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks()
+        tracks.forEach(track => track.stop())
+      }
+    }
   }, [])
 
   const handleScan = async () => {
     if (!videoRef.current || !canvasRef.current) return
 
-    const detections = await faceapi
-      .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-      .withFaceLandmarks()
-      .withFaceExpressions()
-      .withAgeAndGender()
+    const video = videoRef.current
+    const canvas = canvasRef.current
 
-    if (detections.length > 0) {
-      const detection = detections[0]
-      setFaceAttributes({
-        age: Math.round(detection.age),
-        gender: detection.gender,
-        expression: Object.entries(detection.expressions).reduce((a, b) => a[1] > b[1] ? a : b)[0],
-      })
+    const displaySize = { width: video.videoWidth, height: video.videoHeight }
+    faceapi.matchDimensions(canvas, displaySize)
 
-      // Draw face landmarks on canvas
-      const dims = faceapi.matchDimensions(canvasRef.current, videoRef.current, true)
-      const resizedDetections = faceapi.resizeResults(detections, dims)
-      faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections)
+    try {
+      const detections = await faceapi
+        .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceExpressions()
+        .withAgeAndGender()
 
-      // Create 3D model
-      create3DFaceModel(detection.landmarks.positions)
-    } else {
-      setError('No face detected. Please try again.')
+      const resizedDetections = faceapi.resizeResults(detections, displaySize)
+
+      canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height)
+      faceapi.draw.drawDetections(canvas, resizedDetections)
+      faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+
+      if (detections.length > 0) {
+        const detection = detections[0]
+        setFaceAttributes({
+          age: Math.round(detection.age),
+          gender: detection.gender,
+          expression: Object.entries(detection.expressions).reduce((a, b) => a[1] > b[1] ? a : b)[0],
+        })
+
+        create3DFaceModel(detection.landmarks.positions)
+      } else {
+        setError('No face detected. Please try again.')
+      }
+    } catch (err) {
+      console.error('Error during face detection:', err)
+      setError('An error occurred during face detection. Please try again.')
     }
   }
 
   const create3DFaceModel = (landmarks: faceapi.Point[]) => {
     if (!threeContainerRef.current) return
 
-    // Clear previous content
     while (threeContainerRef.current.firstChild) {
       threeContainerRef.current.removeChild(threeContainerRef.current.firstChild)
     }
 
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, 400 / 400, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
     const renderer = new THREE.WebGLRenderer()
 
     renderer.setSize(400, 400)
@@ -120,11 +138,7 @@ const FaceDetection: React.FC = () => {
         
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <svg className="animate-spin h-8 w-8 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>Loading face detection models...</span>
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
           </div>
         ) : error ? (
           <div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded relative" role="alert">
@@ -140,6 +154,7 @@ const FaceDetection: React.FC = () => {
                   ref={videoRef}
                   autoPlay
                   muted
+                  playsInline
                   className="w-full h-auto"
                   style={{ maxWidth: '500px' }}
                 />
